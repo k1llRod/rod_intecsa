@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+
+        <!-- sale.order inherit form view -->
+        <record id="view_order_form" model="ir.ui.view">
+            <field name="name">sale.order.inherit.view.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <!-- Add your xpath here -->
+                <xpath expr="//sheet/notebook/page[last()]" position="after">
+                    <page string="Agrupador de Productos" name="grouped_products_for_invoice">
+
+                        <button name="create_group" class="btn btn-primary" type="object"
+                                attrs="{'invisible':[('state','=','sale')]}">CREAR UN GRUPO</button>
+
+                        <field name="grouped_products_ids" context="{'saleid':active_id}">
+                            <form string="Grupo">
+                                <group>
+                                    <group>
+                                        <div class="oe_title">
+                                            <h1>
+                                                <field name="code"/>
+                                            </h1>
+                                        </div>
+                                        <field name="total_amount" readonly="1" force_save="1"/>
+                                        <field name="description"/>
+                                    </group>
+                                </group>
+                            </form>
+                            <tree editable="bottom" create="false" delete="false" edit="false">
+                                <field readonly="1" name="code"/>
+                                <field readonly="1" name="description"/>
+                                <field readonly="1" name="total_amount"/>
+                                <button name="edit_group" type="object" icon="fa-edit" title="Edit" string="Editar"
+                                        attrs="{'invisible':[('parent.state','=','sale')]}"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+        <record id="bi_view_move_form_inherit" model="ir.ui.view">
+            <field name="name">view.move.form.field.custom.weight.fields</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']"
+                    position="after">
+
+                    <field name="partner_id" readonly="1"/>
+                    <field name="resource_sales_id" readonly="1"/>
+                    <field name='resource_purchase_id' readonly="1"/>
+                    <field name='date_invoice' readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_move_form_bi_inherit" model="ir.ui.view">
+            <field name="name">view.move.form.bi.inherit</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                <field name="partner_id" readonly="1"/>
+                <field name="resource_sales_id" readonly="1"/>
+                <field name='resource_purchase_id' readonly="1"/>
+                <field name='date_invoice' readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_move_line_form_bi_inherit" model="ir.ui.view">
+            <field name="name">view.move.line.form.bi.inherit</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_move_line_form"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="after">
+                <field name="partner_id" readonly="1"/>
+                <field name="resource_sales_id" readonly="1"/>
+                <field name='resource_purchase_id' readonly="1"/>
+                <field name='date_invoice' readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </data>
+</odoo>
+

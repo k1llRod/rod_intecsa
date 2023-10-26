@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Adición de campos HOSPITAL y CONDICIONES DE VENTA en sale.order-->
+        <!--Adición de campos MÉDICO y PACIENTE en sale.order-->
+        <record id="insert_ref_sale_order" model="ir.ui.view">
+            <field name="name">insert.ref.sale.order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="before">
+                    <field name="hospital_id" widget="res_partner_many2one"
+                           options="{&quot;always_reload&quot;: True}"/>
+                    <field name="terms_id"/>
+                </xpath>
+                <xpath expr="//group/field[@name='partner_id']" position="after">
+                    <field name="is_invoice_state" attrs="{'invisible': True}"/>
+                    <field name="doctor" attrs="{'readonly': [('is_invoice_state','=',True)]}"/>
+                    <field name="patient" attrs="{'readonly': [('is_invoice_state','=',True)]}"/>
+                    <field name="amount_open" attrs="{'invisible': True}"/>
+                    <field name="amount_des" attrs="{'invisible': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_sale_order_inherit_search" model="ir.ui.view">
+            <field name="name">sale.order.search.expand</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <!-- This field will show up on the quick search -->
+                    <field name="hospital_id"/>
+                    <field name="terms_id"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

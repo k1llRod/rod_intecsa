@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- utm.medium -->
+    <record id="sale_terms_view_tree" model="ir.ui.view">
+        <field name="name">sale.terms.view.tree</field>
+        <field name="model">sale.terms</field>
+        <field name="arch" type="xml">
+            <tree string="Terminos" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sale_terms_view_form" model="ir.ui.view">
+        <field name="name">sale.terms.view.form</field>
+        <field name="model">sale.terms</field>
+        <field name="arch" type="xml">
+            <form string="Terminos">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sale_terms_view_search" model="ir.ui.view">
+        <field name="name">sale.terms.view.search</field>
+        <field name="model">sale.terms</field>
+        <field name="arch" type="xml">
+            <search string="Search Condiciones de venta">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+    
+    <record id="sale_terms_action" model="ir.actions.act_window">
+        <field name="name">Condiciones de la Venta</field>
+        <field name="res_model">sale.terms</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="sale_terms_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define una nueva condicón de venta.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_utm_medium"
+        action="sale_terms_action"
+        parent="sale.menu_sales_config"
+        sequence="5"
+        groups="base.group_no_one"/>
+</odoo>

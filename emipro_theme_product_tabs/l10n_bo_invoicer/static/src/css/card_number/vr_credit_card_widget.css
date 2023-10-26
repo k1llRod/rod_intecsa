@@ -1,0 +1,20 @@
+.vr_in_nro_credit_card{
+    border:2px solid #ccc;
+    text-align:center;
+    font-size:20px;
+    /*margin:0 2px 10px 0;*/
+    margin-bottom: 0px !important;
+    border-radius:4px;
+    padding:2px;
+    outline: none;
+    caret-color: transparent;
+}
+.vr_in_nro_credit_card:focus{
+    border-color: #00A09D;
+    background-color: #00A09D;
+    color: #fff;
+}
+.vr_span_nro_credit_card{
+    font-size: 20px;
+    margin: 0 2px !important;
+}

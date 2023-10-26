@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+        
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_inherit_res_config_settings_form" model="ir.ui.view">
+            <field name="name">view.inherit.res.config.settings.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+
+                <!-- position: after|before|replace|attributes|inside -->
+                <xpath expr="//field[@name='has_accounting_entries']" position="after">
+                    <h2 attrs="{'invisible': [('has_chart_of_accounts','==',False)]}">Descuentos Globales</h2>
+                    <div class="row mt16 o_settings_container"
+                         attrs="{'invisible': [('has_chart_of_accounts','==',False)]}">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="enable_discount"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for ='enable_discount'/>
+                                <div class="text-muted">
+                                    Activar descuento
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box" attrs="{'invisible':[('enable_discount','==',False)]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Items</span>
+                                <div class="text-muted">
+                                        Definir los items para descuento
+                                </div>
+                                <div class="content-group">
+                                    <div class="row mt16" >
+                                        <label for="sales_discount_product"
+                                               class="col-md-3 o_light_label"/>
+                                        <field name="sales_discount_product"
+                                               attrs="{'required': [('enable_discount','==',True)]}"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="purchase_discount_product"
+                                               class="col-md-3 o_light_label"/>
+                                        <field name="purchase_discount_product"
+                                               attrs="{'required': [('enable_discount','==',True)]}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+        
+    </data>
+</odoo>

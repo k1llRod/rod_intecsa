@@ -1,0 +1,30 @@
+<odoo>
+
+    <data>
+
+        <record id="view_stock_warehouse_form" model="ir.ui.view">
+            <field name="name">view.stock.warehouse.form</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[last()]" position="after">
+                    <page string="Facturación Electrónica">
+                        <group>
+                            <group>
+                                <field name="vr_codigo_sucursal"/>
+                            </group>
+                            <group>
+                                <field name="vr_metodo_pago"/>
+                                <field name="vr_tipo_moneda"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

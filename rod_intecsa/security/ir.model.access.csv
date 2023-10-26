@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rod_intecsa_rod_intecsa,rod_intecsa.rod_intecsa,model_rod_intecsa_rod_intecsa,base.group_user,1,1,1,1

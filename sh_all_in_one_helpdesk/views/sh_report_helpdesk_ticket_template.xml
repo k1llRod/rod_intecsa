@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="helpdesk_ticket_template">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="container">
+                    <br />
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>
+                                <span t-field="o.name" />
+                            </h2>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Nombre del cliente:</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.person_name" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Fecha:</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.create_date" t-options='{"widget": "date"}'/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Artículo:</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.x_articulo" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Modelo:</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.x_modelo"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Marca:</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.x_marca" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Serie:</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.x_serie" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Responsable:</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.user_id" />
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Person Name</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.person_name" />
+                                </div>
+                            </div>
+                        </div-->>
+                    </div>
+                    <div class="row">
+                        <!--<div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Ticket Subject Type</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.subject_id" />
+                                </div>
+                            </div>	
+                        </div>-->
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Email</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.email" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Category</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.category_id" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Replied Date</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.replied_date" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Sub Category</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.sub_category_id" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Closed Date</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.close_date" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Priority</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.priority" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Closed By</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.close_by" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6"></div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Cancelled Date</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.cancel_date" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6"></div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Cancelled Reason</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span t-field="o.cancel_reason" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="row">
+                        <div class="col-3">
+                            <strong>Productos</strong>
+                        </div>
+                        <div class="col-9">
+                            <span t-if='o.sh_display_product'>
+                                <span t-field="o.product_ids" />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <h2>Description</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span t-field="o.description" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Customer Rating</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span title="Rating" role="img" t-attf-aria-label="Rating: #{o.priority_new} on 3">
+                                        <t t-foreach="range(2, 7)" t-as="i">
+                                            <span t-attf-class="fa fa-lg fa-star#{'' if i &lt;= int(o.priority_new) else '-o'}" />
+                                        </t>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Nota:</strong>
+                                </div>
+				<p>Todo Equipo en Diagnoostico o Formateo tiene un periodo de 48 horas despues del dia siguiente</p>
+				<p>se pide comprension pasado las 48 horas podran comunicarse al numero 2311120 para saber el estado del equipo</p>
+				<p>pasado los 31 dias el equipo no es recogido la empresa no se hace responsable por ningun daño o perdidaalguna</p> 
+                                <div class="col-6">
+                                    <span t-field="o.customer_comment" />
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+		<div class="row">
+                        <!--<div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Customer Rating</strong>
+                                </div>
+                                <div class="col-6">
+                                    <span title="Rating" role="img" t-attf-aria-label="Rating: #{o.priority_new} on 3">
+                                        <t t-foreach="range(2, 7)" t-as="i">
+                                            <span t-attf-class="fa fa-lg fa-star#{'' if i &lt;= int(o.priority_new) else '-o'}" />
+                                        </t>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="col-6">
+                            <div class="row">
+                                <!--<div class="col-1">-->
+                                    <strong>Nota:</strong>
+                                
+                                Todo Equipo en Diagnoostico o Formateo tiene un periodo de 48 horas despues del dia siguiente
+                                se pide comprension pasado las 48 horas podran comunicarse al numero 2311120 para saber el estado del equipo
+                                pasado los 31 dias el equipo no es recogido la empresa no se hace responsable por ningun daño o perdidaalguna
+                                <!--</div>-->
+				<!--<div class="col-6">
+                                    <span t-field="o.customer_comment" />
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>	
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="report_helpdeskticket">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="sh_all_in_one_helpdesk.helpdesk_ticket_template" t-lang="o.partner_id.lang" />
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+
+        <!-- vr.grouped_products form view -->
+        <record id="vr_grouped_products_view_form" model="ir.ui.view">
+            <field name="name">vr.grouped_products.view.form</field>
+            <field name="model">vr.grouped_products</field>
+            <field name="arch" type="xml">
+                <form string="Creación de Grupo" create="false" edit="false">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="remove_group" type="object" class="oe_stat_button" icon="fa-trash"
+                                    attrs="{'invisible':['|',('id','=',False),('edit','=',True)]}">
+                                Remover
+                            </button>
+                        </div>
+                        <group>
+                            <div class="oe_title">
+                                <h1>
+                                    <label for="code" string="Código"/>
+                                    <field name="code" attrs="{'readonly':[('edit','=',True)]}"/>
+                                </h1>
+                            </div>
+                            <group>
+                             <!--   <field name="tot" invisible="1"/>-->
+                                <h1 style="text-align:right;">
+                                    <field name="total_amount" readonly="1" force_save="1"/>
+                                </h1>
+                                <br></br>
+                                <h3 style="text-align:right;">
+                                   
+                                </h3>
+                                <br></br>
+                                <h3 style="text-align:right;">
+                                    <label for="total" string="Total"/>
+                                    <field name="total" readonly="1" force_save="1"/>
+                                </h3>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="description" attrs="{'readonly':[('edit','=',True)]}"/>
+                            <field name="product_uom" attrs="{'readonly':[('edit','=',True)]}"/>
+                            <field name="product_uom_qty" attrs="{'readonly':[('edit','=',True)]}"/>
+                            <field name="edit" invisible="1"/>
+                        </group>
+
+                        <div>
+                            <field name="products_ids" no_label="1" attrs="{'readonly':[('edit','=',True)]}">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="product_uom_qty"/>
+                                    <field name="product_uom"/>
+                                    <field name="price_unit"/>
+<!--                                    <field name="disc"/>-->
+                                </tree>
+                            </field>
+                        </div>
+
+                        <!--                        <footer attrs="{'invisible':[('edit','=',True)]}">-->
+                        <!--                             <button name="create" type="object" class="oe_stat_button" icon="fa-trash">-->
+                        <!--                                Crear-->
+                        <!--                            </button>-->
+                        <!--                        </footer>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--         vr_grouped_products tree view -->
+        <!--        <record id="vr_grouped_products_view_tree" model="ir.ui.view">-->
+        <!--            <field name="name">vr.grouped.products.view.tree</field>-->
+        <!--            <field name="model">vr.grouped_products</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <tree editable="bottom" create="0" delete="0" edit="0">-->
+        <!--                    <field name="code"/>-->
+        <!--                    <field name="description"/>-->
+        <!--                    <field name="total_amount"/>    -->
+        <!--                    <button name="edit_group" type="object" icon="fa-edit" title="Edit" string="Editar" />-->
+        <!--                </tree>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+    </data>
+</odoo>

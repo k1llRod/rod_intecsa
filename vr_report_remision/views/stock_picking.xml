@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Adición de glosa y pie de firmas Vale de entrega de albaranes-->
+        <template id="vr_report_delivery_document_inherit" inherit_id="stock.report_delivery_document">
+            <xpath expr="//div[hasclass('row')]" position="after">
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>
+                <div t-if="o.note" class="col-auto">
+                    <strong>Glosa:</strong>
+                    <p t-field="o.note"/>
+                </div>
+            </xpath>
+            <xpath expr="//div[hasclass('page')]" position="after">
+                <t t-call="vr_report_remision.external_layout_footer"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

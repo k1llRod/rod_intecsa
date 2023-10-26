@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_report_landed_cost" model="report.paperformat">
+            <field name="name">A4 Report Cost</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">25</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+                id="report_landed_cost"
+                string="Reporte de costo"
+                model="stock.landed.cost"
+                report_type="qweb-pdf"
+                name="vr_report_remision.report_landed_cost_template"
+                file="vr_report_remision.report_landed_cost_template"
+                paperformat="paperformat_report_landed_cost"
+        />
+
+        <template id="external_layout_standard_custom">
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <table style="width: 100%;">
+                <colgroup>
+                    <col style="width: 30%"/>
+                    <col style="width: 40%"/>
+                    <col style="width: 30%"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <td>
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 80px;" alt="Logo"/>
+                        </td>
+                        <td >
+                            <div class="panel" style="text-align:center;">
+                                <h3><span t-field="company.name"/><br/>
+                                    HOJA DE COSTO POR RECEPCION
+                                </h3>
+                            </div>
+                        </td>
+                        <td style="padding:0px 0 0px 0; vertical-align:top; text-align:right;" >
+                            <p>PAG: <span class="page"/>/<span class="topage"/><br/>
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/><br/></p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+            <div class="col-12">
+                <div style="border-bottom: 1px dashed black;"/>
+            </div>
+
+        </div>
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout"/>
+            </div>
+            <t t-raw="0"/>
+        </div>
+
+<!--        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">-->
+<!--            <div class="text-center" style="border-top: 1px solid black;">-->
+<!--                <ul class="list-inline mb4">-->
+<!--                    &lt;!&ndash; using the list-inline-item class from bootstrap causes weird behaviours in pdf report-->
+<!--                         adding d-inline class fixes the problem&ndash;&gt;-->
+<!--                    <li t-if="company.phone" class="list-inline-item d-inline"><span class="o_force_ltr" t-field="company.phone"/></li>-->
+<!--                    <li t-if="company.email" class="list-inline-item d-inline"><span t-field="company.email"/></li>-->
+<!--                    <li t-if="company.website" class="list-inline-item d-inline"><span t-field="company.website"/></li>-->
+<!--                    <li t-if="company.vat" class="list-inline-item d-inline"><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-field="company.vat"/></li>-->
+<!--                </ul>-->
+
+<!--                <div name="financial_infos">-->
+<!--                    <span t-field="company.report_footer"/>-->
+<!--                </div>-->
+
+<!--                <div t-if="report_type == 'pdf'" class="text-muted">-->
+<!--                    Page: <span class="page"/> / <span class="topage"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </template>
+    </data>
+</odoo>

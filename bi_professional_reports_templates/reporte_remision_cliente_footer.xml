@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--<template id="external_layout_footer">
+            <div class="footer">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <table class="container" style="width:100%; font-size:12px; font-family:Arial; border:1px solid #000; bottom-page" border="1" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr style="height: 18px;">
+                                <td style="width: 33.3333%; text-align: center; height: 18px; border:1px solid #999; padding:10px;"><strong>RECIBIDO CONFORME</strong></td>
+                                <td style="width: 33.3333%; text-align: center; height: 18px; border:1px solid #999; padding:10px;"><strong>ENTREGUÉ CONFORME</strong></td>
+                                <td style="width: 33.3333%; text-align: center; height: 18px; padding:10px;"><strong>OBSERVACIONES</strong></td>
+                            </tr>
+                            <tr style="height: 91px;">
+                                <td style="width: 33.3333%; height: 91px;border:1px solid #999; padding:10px;">
+                                    <p>&amp;nbsp;</p>
+                                    <p>&amp;nbsp;</p>
+                                    <p>Firma:</p>
+                                    <p>Nombre:</p>
+                                    <p>Fecha;</p>
+                                </td>
+                                <td style="width: 33.3333%; height: 91px; border:1px solid #999; padding:10px;">
+                                    <p>&amp;nbsp;</p>
+                                    <p>&amp;nbsp;</p>
+                                    <p>Firma:</p>
+                                    <p>Nombre:</p>
+                                    <p>Fecha;</p>
+                                </td>
+                                <td style="width: 33.3333%; height: 91px; border:1px solid #999;">&amp;nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </template>-->
+        <template id="external_layout_footer" name="page Footer">
+                <t t-set="company" t-value="company.sudo()"/>
+                <t t-set="footer_style" t-value="'text-align:center;display:inline-block;width:100%;max-width:100%'"></t>
+                <div class="col-12 text-center float-left" t-attf-style="background-color:transparent !important;border-top: 1px solid;padding-top:5px;padding-left:0px; padding-right:0px;">
+                    <t t-if="not company.report_footer">
+                        <div t-attf-style="#{footer_style}"> <!--Address -->
+                            <table class="container" style="width:100%; font-size:12px; font-family:Arial; border:1px solid #000; bottom-page" border="1" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr style="height: 18px;">
+                                        <td style="width: 33.3333%; text-align: center; height: 18px; border:1px solid #999; padding:10px;"><strong>RECIBÍ CONFORME</strong></td>
+                                        <td style="width: 33.3333%; text-align: center; height: 18px; border:1px solid #999; padding:10px;"><strong>ENTREGUÉ CONFORME</strong></td>
+                                        <td style="width: 33.3333%; text-align: center; height: 18px; padding:10px;"><strong>OBSERVACIONES</strong></td>
+                                    </tr>
+                                    <tr class="text-left" style="height: 91px;">
+                                        <td style="width: 33.3333%; height: 91px;border:1px solid #999; padding:10px;">
+                                            <p>&amp;nbsp;</p>
+                                            <p>&amp;nbsp;</p>
+                                            <p>Firma:</p>
+                                            <p>Nombre:</p>
+                                            <p>Fecha:</p>
+                                        </td>
+                                        <td style="width: 33.3333%; height: 91px; border:1px solid #999; padding:10px;">
+                                            <p>&amp;nbsp;</p>
+                                            <p>&amp;nbsp;</p>
+                                            <p>Firma:</p>
+                                            <p>Nombre:</p>
+                                            <p>Fecha:</p>
+                                        </td>
+                                        <td style="width: 33.3333%; height: 91px; border:1px solid #999;">&amp;nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                    <div t-if="company.report_footer" class="text-center"><span t-field="company.report_footer"/></div>
+                </div>
+            <!--<div class="col-12 text-center text-muted float-left">Page: <span class="page"/> / <span class="topage"/></div>-->
+        </template>
+    </data>
+</odoo>

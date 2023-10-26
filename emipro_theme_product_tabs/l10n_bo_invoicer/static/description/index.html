@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentación l10n_bo_invoicer_plus</title>
+</head>
+<body>
+
+<main id="main_document_invoicer_plus">
+    <section id="section_content">
+        <h1>Configuración</h1>
+        <ul>
+            <li>
+                <h2>Url servidor Versatil</h2>
+                <h4>
+                    Servidor al cual se conectará la aplicación para procesar todo lo referente a la facturación electrónica.
+                </h4>
+                <p>Ajustes → VR Invoicer</p>
+                <img src="./images/url_servidor.jpg" alt="URL Servidor">
+            </li>
+            <li>
+                <h2>API KEY</h2>
+                <h4>
+                    Código API-KEY proporcionado por Versatil para uso de los servicios proporcionados para la facturación.
+                </h4>
+                <p>Ajustes → Compañias</p>
+                <img src="./images/api_key.jpg" alt="API KEY">
+            </li>
+            <li>
+                <h2>Sucursal / Almacén</h2>
+                <h4>
+                    Se debe configurar el código de sucursal que se le asignará a cada almacen o sucursal como también el tipo de moneda que se utilizará.
+                </h4>
+                <p>Inventario → Almacenes</p>
+                <img src="./images/sucursal.jpg" alt="Sucursal y Moneda">
+            </li>
+            <li>
+                <h2>Productos</h2>
+                <h4>
+                    Cada producto debe ser <strong>homologado</strong>, para esto se require los datos mostrados en la imagen.
+                </h4>
+                <p>
+                    <ul>
+                        <li>
+                            <strong>Código Producto:</strong> Código proporcionado por SIAT.
+                        </li>
+                        <li>
+                            <strong>Código Actividad:</strong> Código de actividad al que pertenece el producto (También proporcionado por SIAT).
+                        </li>
+                        <li>
+                            <strong>Código Unidad Medida:</strong> Unidad de medida que utiliza el producto.
+                        </li>
+                        <li>
+                            <strong>Usar como nombre de Producto:</strong> Seleccione un nombre de producto, la referencia interna o el código de barras.
+                        </li>
+                        <li>
+                            <strong>Nombre de Producto:</strong> Campo de solo lectura que muestra el nombre seleccionado.
+                        </li>
+                    </ul>
+                </p>
+                <p>Inventario → Productos</p>
+                <img src="./images/productos.jpg" alt="Homologación Productos">
+            </li>
+        </ul>
+        <h1>Facturación</h1>
+        <ul>
+            <li>
+                <h2>Facturación exitosa</h2>
+                <h4>
+                    Una vez que la factura es procesada correctamente por SIAT, se habilita la pestaña "Datos Facturación" donde se muestran lo siguiente:
+                </h4>
+                <p>
+                    <ul>
+                        <li>
+                            <strong>Número Factura:</strong> El número asignado automáticamente en el servidor Versatil para esta factura y para esta sucursal.
+                        </li>
+                        <li>
+                            <strong>Código Recepción:</strong> Código enviado por SIAT como comprobante e identificador de la factura procesada.
+                        </li>
+                        <li>
+                            <strong>Link SIAT:</strong> Link que abre la página de impuestos con los datos de la factura procesada.
+                        </li>
+                    </ul>
+                </p>
+                <h4>
+                    En caso de que se requiera ver o imprimir la factura con formato SIAT, se tienen dos opciones:
+                </h4>
+                <p>
+                    <ul>
+                        <li>
+                            <strong>PDF en formato Media página:</strong> Obtiene la factura en formato "Media página" desde el servidor y la abre en una pestaña nueva
+                        </li>
+                        <li>
+                            <strong>PDF en formato Rollo:</strong> Obtiene la factura en formato "Rollo" desde el servidor y la abre en una pestaña nueva
+                        </li>
+                    </ul>
+                </p>
+                <p>Ajustes → VR Invoicer</p>
+                <img src="./images/factura_procesada.jpg" alt="Factura procesada">
+            </li>
+        </ul>
+    </section>
+</main>
+
+
+</body>
+</html>

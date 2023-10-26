@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="rod_intecsa.list">
+      <field name="name">rod_intecsa list</field>
+      <field name="model">rod_intecsa.rod_intecsa</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="rod_intecsa.action_window">
+      <field name="name">rod_intecsa window</field>
+      <field name="res_model">rod_intecsa.rod_intecsa</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="rod_intecsa.action_server">
+      <field name="name">rod_intecsa server</field>
+      <field name="model_id" ref="model_rod_intecsa_rod_intecsa"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="rod_intecsa" id="rod_intecsa.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="rod_intecsa.menu_1" parent="rod_intecsa.menu_root"/>
+    <menuitem name="Menu 2" id="rod_intecsa.menu_2" parent="rod_intecsa.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="rod_intecsa.menu_1_list" parent="rod_intecsa.menu_1"
+              action="rod_intecsa.action_window"/>
+    <menuitem name="Server to list" id="rod_intecsa" parent="rod_intecsa.menu_2"
+              action="rod_intecsa.action_server"/>
+-->
+  </data>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="l10n_bo_invoicer_plus.tmpl_credit_card">
+        <t t-if="widget.mode=='readonly' || widget.recordData.state!='draft'">
+            <span class="vr_span_nro_credit_card o_field_char o_field_widget" name="nro_tarjeta">
+                <t t-esc="widget.value"/>
+            </span>
+        </t>
+        <t t-else="">
+            <input type="text" maxlength="1"
+               class="vr_in_nro_credit_card o_field_char o_field_widget o_input o_required_modifier"/>
+        </t>
+    </t>
+</templates>

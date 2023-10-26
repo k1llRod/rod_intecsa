@@ -1,0 +1,219 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* anb_stock_picking_valued
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-16 14:28+0100\n"
+"PO-Revision-Date: 2017-11-16 14:28+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.view_stock_picking_valued_form
+msgid "(update)"
+msgstr "(actualizar)"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.report_delivery_document
+msgid "<strong>Disc.(%)</strong>"
+msgstr "<strong>Desc.(%)</strong>"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.report_delivery_document
+msgid "<strong>Ordered Quantity</strong>"
+msgstr "<strong>Cantidad pedida</strong>"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.report_delivery_document
+msgid "<strong>Payment Terms</strong>"
+msgstr "<strong>Plazos de pago</strong>"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.report_delivery_document
+msgid "<strong>Price</strong>"
+msgstr "<strong>Precio</strong>"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.report_delivery_document
+msgid "<strong>Product</strong>"
+msgstr "<strong>Producto</strong>"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.report_delivery_document
+msgid "<strong>Taxes</strong>"
+msgstr "<strong>Impuestos</strong>"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.report_delivery_document
+msgid "<strong>Total Price</strong>"
+msgstr "<strong>Precio total</strong>"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.report_delivery_document
+msgid "<strong>Total Without Taxes</strong>"
+msgstr "<strong>Total sin impuestos</strong>"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.report_delivery_document
+msgid "<strong>Total</strong>"
+msgstr "<strong>Total</strong>"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.report_delivery_document
+msgid "<strong>Unit Price</strong>"
+msgstr "<strong>Precio unidad</strong>"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.report_delivery_document
+msgid "<strong>Your Reference</strong>"
+msgstr "<strong>Su referencia</strong>"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_move_currency_id
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_picking_currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_picking_client_order_ref
+msgid "Customer/Supplier Reference"
+msgstr "Referencia cliente/proveedor"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_move_discount
+msgid "Discount (%)"
+msgstr "Descuento (%)"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_picking_fiscal_position_id
+msgid "Fiscal Position"
+msgstr "Posición fiscal"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.view_stock_picking_valued_form
+msgid "Invoicing"
+msgstr "Facturación"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_picking_payment_term_id
+msgid "Payment Terms"
+msgstr "Plazos de pago"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_move_picking_type_code
+msgid "Picking type code"
+msgstr "Tipo de albarán"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_move_price_reduce
+msgid "Price Reduce"
+msgstr "Reducción de precio"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_move_price_reduce_taxexcl
+msgid "Price Reduce Tax excl"
+msgstr "Precio reducido sin IVA"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_move_price_reduce_taxinc
+msgid "Price Reduce Tax inc"
+msgstr "Precio reducido con IVA"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_picking_pricelist_id
+msgid "Pricelist"
+msgstr "Tarifa"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,help:anb_stock_picking_valued.field_stock_picking_pricelist_id
+msgid "Pricelist for current stock picking."
+msgstr "Tarifa para el albarán actual."
+
+#. module: anb_stock_picking_valued
+#: model:ir.model,name:anb_stock_picking_valued.model_procurement_order
+msgid "Procurement"
+msgstr "Abastecimiento"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model,name:anb_stock_picking_valued.model_purchase_order
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model,name:anb_stock_picking_valued.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea de pedido de compra"
+
+#. module: anb_stock_picking_valued
+#: model:ir.ui.view,arch_db:anb_stock_picking_valued.view_stock_picking_valued_form
+msgid "Sale/Purchase Information"
+msgstr "Información Ventas/Compras"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model,name:anb_stock_picking_valued.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_move_price_subtotal
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_move_price_tax
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_move_tax_id
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_picking_amount_tax
+msgid "Taxes"
+msgstr "Impuestos"
+
+#. module: anb_stock_picking_valued
+#: code:addons/anb_stock_picking_valued/models/stock.py:317
+#, python-format
+msgid "The selected lot for the operation is different from the move one."
+msgstr ""
+"El lote seleccionado para la operación es diferente al del movimiento de "
+"existencias."
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_move_price_total
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_picking_amount_total
+msgid "Total"
+msgstr "Total"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model,name:anb_stock_picking_valued.model_stock_picking
+msgid "Transfer"
+msgstr "Transferir"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_move_move_price_unit
+msgid "Unit Price"
+msgstr "Precio unitario"
+
+#. module: anb_stock_picking_valued
+#: model:ir.model.fields,field_description:anb_stock_picking_valued.field_stock_picking_amount_untaxed
+msgid "Untaxed Amount"
+msgstr "Base imponible"
+
+#. module: anb_stock_picking_valued
+#: code:addons/anb_stock_picking_valued/models/stock.py:201
+#: code:addons/anb_stock_picking_valued/models/stock.py:654
+#: code:addons/anb_stock_picking_valued/models/stock.py:662
+#, python-format
+msgid "Warning for %s"
+msgstr "Aviso para %s"
+
+#~ msgid "Extra Move: "
+#~ msgstr "Movimiento extra:"
+
+#~ msgid "Invalid operation lot"
+#~ msgstr "Lote de operación incorrecto"

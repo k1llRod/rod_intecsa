@@ -1,0 +1,117 @@
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_inherit_account_move_form" model="ir.ui.view">
+            <field name="name">view.inherit.account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_reference']" position="after">
+                    <field name="print_original" attrs="{'invisible':True}"/>
+                    <field name="date_time"/>
+                    <field name="nit_ci"/>
+                    <field name="razon_social"/>
+                </xpath>
+                <xpath expr="//header/button[@name='action_invoice_sent']" position="after">
+                    <button name="action_print_original"
+                            type="object"
+                            string="Imprimir Factura (Original)"
+                            attrs="{'invisible':['|', '|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', True), ('print_original','!=',False), ('move_type', 'not in', ('out_invoice', 'out_refund'))]}"
+                            class="oe_highlight"
+                            groups="account.group_account_invoice"
+			    confirm="Are you sure you want to unreconcile this record?"/>
+                    <button name="action_print_original"
+                            type="object"
+                            string="Imprimir Factura (Copia)"
+                            attrs="{'invisible':['|', '|', '|', ('state', '!=', 'posted'), ('is_move_sent', '=', True), ('print_original','=',False), ('move_type', 'not in', ('out_invoice', 'out_refund'))]}"
+                            class="oe_highlight"
+                            groups="account.group_account_invoice"/>
+                </xpath>
+                <xpath expr="//field[@name='payment_reference']" position="after">
+                    <field name="warehouse_id"
+                           attrs="{'invisible': [('move_type', '!=', 'out_invoice')], 'required': [('move_type', '=', 'out_invoice')]}"
+                           domain="[('company_id','=',company_id)]"/>
+                    <!--                    <field name="date_time" />-->
+                    <!--                    <field name="nit_ci"/>-->
+                    <!--                    <field name="razon_social"/>-->
+                </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']" position="after">
+                    <div class="oe_left">
+                        <group id="group_dosif">
+                            <field name="type_dosif"/>
+                            <field name="qr_text"
+                                   attrs="{'invisible': ['|', ('state','not in',['draft']), ('move_type', '=', 'out_invoice')]}"/>
+                            <field name="dosificacion"
+                                   attrs="{'invisible': ['|', ('state', '=', 'purchase'), ('move_type', '!=', 'out_invoice')]}"
+                                   domain="[('type', 'in', ['manual', 'automatica']), ('sucursal_id', '=', warehouse_id)]"
+                                   widget="selection"/>
+                            <field name="n_autorizacion"
+                                   attrs="{'readonly': ['|',('state','!=','draft'),('move_type', '=', 'out_invoice')]}"
+                                   force_save="1"/>
+                            <field name="n_factura"
+                                   attrs="{'readonly':['|',('state','not in',['draft']),('move_type', '=', 'out_invoice'),('type_dosif', '!=', 'manual')]}"
+                                   force_save="1"/>
+                            <!--<field name="codigo_control"
+                                   attrs="{'readonly': ['|',('state','not in',['draft']),('move_type', '=', 'out_invoice'),('type_dosif', '!=', 'manual')]}"
+                                   force_save="1"/>-->
+			    <field name="codigo_control"
+                                   force_save="1"/> 
+                            <field name="tipo_com"
+                                   attrs="{'invisible': ['|', ('state','not in',['draft']), ('move_type', '=', 'out_invoice')]}"/>
+                            <field name="state_sin" force_save="1"/>
+                            <field name="note_credit_debit" force_save="1"/>
+                        </group>
+                    </div>
+                    <div class="oe_left">
+                        <group>
+                            <field name="qr_image" widget="image" options="{'size':[160,160]}"
+                                   nolabel="1"
+                                   attrs="{'invisible': [('move_type', '!=', 'out_invoice')]}"/>
+                        </group>
+                    </div>
+                </xpath>
+                <xpath expr="//group[@class='oe_subtotal_footer oe_right']" position="inside">
+                    <field name="amount_imp" class="oe_subtotal_footer_separator"/>
+                    <field name="amount_iva"/>
+                    <field name="amount_exe"/>
+                    <field name="amount_des"/>
+                    <field name="amount_ice_iehd"/>
+                    <field name="amount_open" class="oe_subtotal_footer_separator"/>
+                </xpath>
+
+                <xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='discount']" position="replace">
+                    <field name="amount_ice_iehd" optional="hide"/>
+                    <field name="amount_exe" optional="hide"/>
+                    <field name="amount_ali_esp" optional="hide"/>
+                    <field name="amount_ali_por" optional="hide"/>
+                </xpath>
+                <!--UNIVERSAL DISCOUNT-->
+                <xpath expr="//group[@id='group_dosif']" position="after">
+                    <group>
+                        <field name="enable_discount" invisible="1"/>
+                        <field name="amount_discount" invisible="1"/>
+                        <field name="global_discount_type"
+                               attrs="{'invisible':[('enable_discount','!=',True),('amount_discount','=',0)],'readonly':['|',('enable_discount','!=',True),('state', 'in', ['posted', 'cancel'])]}"/>
+                        <field name="global_discount_rate"
+                               attrs="{'invisible':[('enable_discount','!=',True),('amount_discount','=',0)],'readonly':['|','|',('enable_discount','!=',True),('state', 'in', ['posted', 'cancel']), ('global_discount_type', 'in', [None, False])]}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_move_inherit_tree" model="ir.ui.view">
+            <field name="name">view.account.move.inherit.tree</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="n_factura"/>
+                </xpath>
+                <xpath expr="//field[@name='amount_untaxed_signed']" position="after">
+                    <field name="amount_imp"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

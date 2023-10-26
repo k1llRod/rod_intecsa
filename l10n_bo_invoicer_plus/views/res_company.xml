@@ -1,0 +1,29 @@
+<odoo>
+
+    <data>
+
+        <record id="view_res_company_form" model="ir.ui.view">
+            <field name="name">view.res.company.form</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[last()]" position="after">
+                    <page string="Facturación Electrónica">
+                        <group>
+                            <group>
+                                <field name="vr_api_key" string="API KEY proporcionado por Versatil" password="1"/>
+                            </group>
+                        </group>
+                        <div style="border-top:1px solid #ccc; padding-top:4px;">
+                            <button name="check_connection_with_versatil" type="object" string="Verificar conexión"/>
+                        </div>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

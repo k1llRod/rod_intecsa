@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report id="report_order_mod" string="Orden de pedido" model="sale.order.invoicing" report_type="qweb-pdf" name="mod_repor.report_order" file="mod_repor.report_order" menu="False" />
+        <template id="report_order">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <table style="width:100%; font-family:Arial; border:1px solid #000;" border="1" cellpadding="10" cellspacing="0">
+                                <tr style="font-size:22px;">
+                                    <td style="padding:20px 10px 10px 10px; font-weight:bold; color:#999; text-align:left; border:0px;">ORDEN DE PEDIDO</td>
+                                    <td style="padding:20px 10px 10px 10px; font-weight:bold; text-align:right; border:0px;">
+                                        OP-
+                                        <span t-field="o.sale_id.name" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px; border:0px;" colspan="2">
+
+                                        <table class="container" style="width:100%; font-size:14px; font-family:Arial; border:1px solid #000;" border="1" cellpadding="0" cellspacing="0">
+                                            <colgroup>
+                                                <col style="width: 30%" />
+                                                <col style="width: 1%" />
+                                                <col style="width: 69%" />
+                                            </colgroup>
+                                            <tbody>
+                                                <tr style="font-size:18px; background-color:#ddd; padding:10px; border:0px;">
+                                                    <th style="text-align:left; padding:10px; border:1px solid #999; border-right:0px;">NOMBRE DE FACTURA</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:10px; border:1px solid #999;">
+                                                        <span t-field="o.partner_id"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="font-size:16px; background-color:#eee;padding:5px; border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">NIT FACTURA</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.name"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">FECHA DEPOSITO</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.deposit_date"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">No DEPOSITO</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.deposit_number"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">CONTACTO COMERCIAL</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.sale_id.partner_id_e.name"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">NIT CONTACTO</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.sale_id.partner_id_e.nit_ci"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">TELEFONO CONTACTO</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.sale_id.partner_id_e.phone"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">PRODUCTO</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.sale_line_ids[0].product_id"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">CANTIDAD</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.sale_line_ids[0].qty_to_invoice"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">PRECIO UNITARIO (Bs.)</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.sale_line_ids[0].product_id.lst_price"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">IMPORTE (Bs.)</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.deposit_amount"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">SUCURSAL</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.sale_id.warehouse_id"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">DESTINO PRODUCTO</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.sale_id.partner_id_e.state_id"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">DIRECCION</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.sale_id.partner_id_e.street"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border:0px;">
+                                                    <th style="text-align:left; padding:5px; border:1px solid #999; border-right:0px;">ASESOR</th>
+                                                    <td style="border:1px solid #999; border-left:0px;">:</td>
+                                                    <td style="padding:5px; border:1px solid #999;">
+                                                        <span t-field="o.sale_id.user_id"></span>
+                                                    </td>
+                                                </tr>                                                
+                                            </tbody>
+                                        </table>
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- <p style="page-break-after:always;"></p> -->
+                            <table style="width:100%; font-family:Arial; border-top:0px; border-left:1px solid #000; border-right:1px solid #000; border-bottom:1px solid #000;" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <th style="background:#ddd; padding:10px; font-size:18px; border:0px;">
+                                        RESPALDO DEPOSITO
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td style="border:0px; text-align:center;">
+                                        <img style="margin:10px; max-height:500px;" t-att-src="'data:image/png;base64,%s' % to_text(o.archivo)"/>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

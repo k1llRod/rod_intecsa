@@ -1,0 +1,36 @@
+<odoo>
+
+    <data>
+
+        <record id="view_res_partner_form" model="ir.ui.view">
+            <field name="name">view.res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='vat']" position="before">
+                    <field name="vr_razon_social"/>
+                </xpath>
+
+                <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="string">NIT/CI</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="vr_extension"/>
+                    <field name="vr_tipo_documento_identidad"/>
+                    <label for="vr_fecha_nacimiento"/>
+                    <div style="display:flex; gap:20px;">
+                        <field name="vr_birthday_day" style="text-align:center; max-width:40px;"/>
+                        <field name="vr_birthday_month" style="text-align:center; max-width:90px;"/>
+                        <field name="vr_birthday_year" style="text-align:center; max-width:80px;"/>
+                    </div>
+                    <field name="vr_fecha_nacimiento" invisible="1" />
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

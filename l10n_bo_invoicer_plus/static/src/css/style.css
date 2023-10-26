@@ -1,0 +1,72 @@
+/*DOCUMENTATION*/
+#main_document_invoicer_plus{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+#section_content>ul>li{
+    list-style: decimal;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+/*#section_content ul li *:not(h2,h4){*/
+/*    font-size: 12px;*/
+/*}*/
+#section_content{
+    flex: 1;
+    border: 1px solid #875A7B;
+    padding: 10px;
+    border-radius: 4px;
+}
+#section_content p{
+    margin: 10px 0;
+}
+#section_content img{
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #875A7B;
+    max-width: 95%;
+}
+/*END DOCUMENTATION*/
+
+.vr_banner_invoice{
+    padding: 8px 0 8px 16px;
+    text-transform: uppercase;
+    text-align: center;
+    position: sticky;
+    top: 0px;
+    z-index: 99;
+    margin-left: -16px;
+    margin-right: -16px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    justify-content: center;
+    word-spacing: 4px;
+    letter-spacing: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+.vr_send_invoice{
+    color: #318f1a;
+    background-color: #ddd;
+    border-top: 1px dashed #318f1a;
+    border-bottom: 1px dashed #318f1a;
+}
+.vr_cancelled_invoice{
+    color: #333;
+    background-color: #ddd;
+    border-top: 1px dashed #4c4c4c;
+    border-bottom: 1px dashed #4c4c4c;
+    background-image: repeating-linear-gradient(-45deg, rgba(145,145,145,.3), rgba(145,145,145,.3) 35px, rgba(221,221,221,.2) 35px, rgba(221,221,221,.2) 70px) !important;
+}
+.vr_pending_invoice{
+    color: #333;
+    background-color: #e5924c73;
+    border-top: 1px dashed #4c4c4c;
+    border-bottom: 1px dashed #4c4c4c;
+}

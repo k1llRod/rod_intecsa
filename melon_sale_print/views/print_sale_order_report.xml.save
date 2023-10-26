@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="print_sale_order_report_document1">
+        <div class="page" style="margin-top:0px, display: block, page-break-inside: avoid, -webkit-region-break-inside: avoid;">
+            <style type="text/css">
+                .tabledata{
+                border-collapse:collapse;
+                border:1px soild #000;
+                }
+                .gxtr >th{
+                text-align:justify;
+                border-top: 1px solid #000;
+                border-left: 1px solid #000;
+                border-right: 1px solid #000;
+                border-bottom: 1px solid #000;
+                background-color:#BEBEBE;
+                border-collapse:collapse;
+                font-size:14px;
+                }
+                .gxtr >td{
+                text-align:justify;
+                border-bottom: 1px solid #000;
+                border-right: 1px solid #000;
+                border-left: 1px solid #000;
+                font-size:14px;
+                }
+                .herdtd{
+                word-wrap:break-word;width:22%;font-size:14px;
+                }
+                .gxdiv{
+                border-left:1px solid #000;
+                font-size:14px;
+                }
+		.footer {
+ 	  	position: running(footer);
+   		left: 0;
+   		bottom: 0;
+   		width: 100%;
+   		background-color: red;
+   		color: white;
+   		text-align: center;
+		}
+		.last_page {
+    			page-break-before: always; 	
+		}
+
+		@page {
+   			@bottom-right {
+       				content: "Please turn over";
+   		 	}
+		}
+
+		@page last_page {
+    			@bottom-right {
+        			content: none;
+    			}
+		}
+            </style>
+            <table class="tabledata">
+               <div>
+                    <tr>
+                        <div style="text-align: right;">
+                            <h5 style="text-align: right; line-height: 100%">
+                                <p style style="line-height: 100%">
+				<span t-field="doc_id.name_ent"/>
+				<span t-field="doc_id.name"/>
+                            </h5>
+			    <!--<h5 style="text-align: right;">
+                                <span t-field="doc_id.name"/>
+                            </h5>-->
+                        </div>
+			<!--<div style="text-align: right;">
+                            <h5 style="text-align: right;">
+                                <span t-field="doc_id.name_ent"/>
+                            </h5>
+                        </div>-->
+                    </tr>
+                    <tr>
+                        <th height="22" colspan="10">
+                            <div class="text-right">
+                                <div class="text-center" style="font-size:20px;">NOTA DE ENTREGA</div>
+                            </div>
+                            <table style="width:100%;" border="1">
+                                <tr>
+                                    <td style="word-wrap:break-word;width:30%;font-size:14px;">Nombre:
+                                    </td>
+                                    <td>
+                                        <span t-field="doc_id.partner_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="herdtd">Nit:
+                                    </td>
+                                    <td>
+                                        <span t-field="doc_id.partner_id.vat"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="herdtd">Dirección:
+                                    </td>
+                                    <td>
+                                        <span t-field="doc_id.partner_id.street"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="herdtd">Teléfono:
+                                    </td>
+                                    <td>
+                                        <span t-field="doc_id.partner_id.phone"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="herdtd">Departamento:
+                                    </td>
+                                    <td>
+                                        <span t-field="doc_id.partner_id.city"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="herdtd">Forma de pago:
+                                    </td>
+                                    <td>
+                                        <span t-field="doc_id.vr_fpago"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="herdtd">Fecha de entrega:
+                                    </td>
+                                    <td>
+                                        <span t-field="doc_id.vr_entrega"/>
+                                    </td>
+                                </tr>
+                                <tr style="height:2px;"/>
+                            </table>
+                        </th>
+                    </tr>
+		   
+                    <tr class="gxtr">
+                        <th width="50%">Descripción</th>
+                        <th width="10%">Cantidad</th>
+                        <th width="10%">Precio Unitario</th>
+                        <th width="10%" style="border-right: 1px solid #000;">Precio Total</th>
+                    </tr>
+		
+                </div>
+                <tbody>
+                    <t t-foreach="doc_id.order_line" t-as="l">
+                        <tr class="gxtr" t-if="l.display_type != 'line_note' and l.product_uom_qty and l.price_unit">
+                            <td>
+                                <span t-field="l.name"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="l.product_uom_qty"/>
+                                <span t-field="l.product_uom"/>
+                            </td>
+                            <td>
+                                <span t-field="l.price_unit"/>
+                            </td>
+                            <td class="text-right" style="border-right: 1px solid black; font-size:14px;">
+                                <t t-set="t_total" t-value="l.product_uom_qty*l.price_unit"/>
+                                <t t-esc="'{0:,.2f}'.format(t_total)"/>
+                            </td>
+                        </tr>
+                        <tr class="gxtr" t-if="l.display_type == 'line_note'" >
+                            <td colspan="4" style="border-left:1px solid #000; border-right:1px solid #000;">
+                                <span class="o_field_text"
+                                      t-field="l.name" t-options="{'widget': 'text'}"/>
+                            </td>
+                        </tr>
+                        <tr t-foreach="items" t-as="j" class="gxtr">
+                            <t t-if="j>=(i%8)">
+                                <td height="22"></td>
+                                <td></td>
+                                <td></td>
+                                <td style="border-right: 1px solid #000;"></td>
+                            </t>
+                        </tr>
+                    </t>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td align="right">
+                                <strong>Total: </strong>
+                            </td>
+                            <td>
+                                <span t-field="doc_id.amount_total" t-options='{"widget": "monetary", "display_currency": doc_id.pricelist_id.currency_id}'/>
+                            </td>
+                        </tr>
+                </tbody>
+                <!--<tfoot>
+                    <table border="1" style="width:100%;">
+                            <tr valign="top">
+                                <td>
+                                    <p class="western" lang="es-ES"><span style="font-family: Calibri, sans-serif;"><span style="font-size: medium;"><strong>PRECIO TOTAL</strong></span></span></p>
+                                </td>
+                                <td colspan="2">
+                                   <strong>Son:</strong>
+                                   <span t-esc="doc_id.total_to_word"/> BOLIVIANOS
+                               </td>
+                            </tr>
+                            <tr valign="top">
+                                <td>
+                                    <p class="western" lang="es-ES"><span style="font-family: Calibri, sans-serif;"><span style="font-size: medium;"><strong>OBSERVACIONES: </strong></span></span></p>
+                                </td>
+                                <td colspan="2">
+                                    <span t-field="doc_id.note"/>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td width="206" height="80">
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                </td>
+                                <td width="288">
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                </td>
+                                <td width="169">
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr valign="button">
+                                <td width="206">
+                                    <h3 class="western" lang="es-ES" align="center"><span style="font-family: Calibri, sans-serif;"><span style="font-size: small;">MANAGER OFFICE</span></span></h3>
+                                </td>
+                                <td width="288">
+                                    <h3 class="western" lang="es-ES" align="center"><span style="font-family: Calibri, sans-serif;"><span style="font-size: small;">ASESOR COMERCIAL</span></span></h3>
+                                </td>
+                                <td width="169">
+                                    <h5 class="western" lang="es-ES" align="center"><span style="font-family: Calibri, sans-serif;"><span style="font-size: small;">CLIENTE</span></span></h5>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td width="206">
+                                    <p lang="es-ES" align="center"><span style="font-family: Calibri, sans-serif;">Lic. Mario Robles M.</span></p>
+                                </td>
+                                <td width="288">
+                                    <p class="western" lang="es-ES-u-co-trad" align="center">&amp;nbsp;</p>
+                                </td>
+                                <td width="169">
+                                    <p class="western" lang="es-ES-u-co-trad" align="center"><span style="font-family: Calibri, sans-serif;">&amp;nbsp;</span></p>
+                                    <p class="western" lang="es-ES-u-co-trad" align="center"><span style="font-family: Calibri, sans-serif;">Cargo.......................................</span></p>
+                                    <p class="western" lang="es-ES-u-co-trad" align="center"><span style="font-family: Calibri, sans-serif;">Nombre....................................</span></p>
+                                </td>
+                            </tr>
+                    </table>
+                </tfoot>-->
+            </table>
+	    <!--<tr class="oe_structure">
+                    <table border="1" style="width:100%;">
+                            <tr valign="top">
+                                <td>
+                                    <p class="western" lang="es-ES"><span style="font-family: Calibri, sans-serif;"><span style="font-size: medium;"><strong>PRECIO TOTAL</strong></span></span></p>
+                                </td>
+                                <td colspan="2">
+                                   <strong>Son:</strong>
+                                   <span t-esc="doc_id.total_to_word"/> BOLIVIANOS
+                               </td>
+                            </tr>
+                            <tr valign="top">
+                                <td>
+                                    <p class="western" lang="es-ES"><span style="font-family: Calibri, sans-serif;"><span style="font-size: medium;"><strong>OBSERVACIONES: </strong></span></span></p>
+                                </td>
+                                <td colspan="2">
+                                    <span t-field="doc_id.note"/>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td width="206" height="80">
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                </td>
+                                <td width="288">
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                </td>
+                                <td width="169">
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr valign="button">
+                                <td width="206">
+                                    <h3 class="western" lang="es-ES" align="center"><span style="font-family: Calibri, sans-serif;"><span style="font-size: small;">MANAGER OFFICE</span></span></h3>
+                                </td>
+                                <td width="288">
+                                    <h3 class="western" lang="es-ES" align="center"><span style="font-family: Calibri, sans-serif;"><span style="font-size: small;">ASESOR COMERCIAL</span></span></h3>
+                                </td>
+                                <td width="169">
+                                    <h5 class="western" lang="es-ES" align="center"><span style="font-family: Calibri, sans-serif;"><span style="font-size: small;">CLIENTE</span></span></h5>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td width="206">
+                                    <p lang="es-ES" align="center"><span style="font-family: Calibri, sans-serif;">Lic. Mario Robles M.</span></p>
+                                </td>
+                                <td width="288">
+                                    <p class="western" lang="es-ES-u-co-trad" align="center">&amp;nbsp;</p>
+                                </td>
+                                <td width="169">
+                                    <p class="western" lang="es-ES-u-co-trad" align="center"><span style="font-family: Calibri, sans-serif;">&amp;nbsp;</span></p>
+                                    <p class="western" lang="es-ES-u-co-trad" align="center"><span style="font-family: Calibri, sans-serif;">Cargo.......................................</span></p>
+                                    <p class="western" lang="es-ES-u-co-trad" align="center"><span style="font-family: Calibri, sans-serif;">Nombre....................................</span></p>
+                                </td>
+                            </tr>
+                    </table>
+                </tr>-->
+        </div>
+	<tr class="last_page">
+                   <table class="table" style="display: block, page-break-inside: avoid, -webkit-region-break-inside: avoid;" border="1" width="100%;">
+			<div>
+                            <tr style="display: block, page-break-inside: avoid, -webkit-region-break-inside: avoid;" valign="top">
+                                <td>
+                                    <p lang="es-ES"><span style="font-family: Calibri, sans-serif;"><span style="font-size: medium;"><strong>PRECIO TOTAL</strong></span></span></p>
+                                </td>
+                                <td colspan="2">
+                                   <strong>Son:</strong>
+                                   <span t-esc="doc_id.total_to_word"/> BOLIVIANOS
+                               </td>
+                            </tr>
+                            <tr style="display: block, page-break-inside: avoid, -webkit-region-break-inside: avoid;" valign="top">
+                                <td>
+                                    <p lang="es-ES"><span style="font-family: Calibri, sans-serif;"><span style="font-size: medium;"><strong>OBSERVACIONES: </strong></span></span></p>
+                                </td>
+                                <td colspan="2">
+                                    <span t-field="doc_id.note"/>
+                                </td>
+                            </tr>
+                            <tr style="display: block, page-break-inside: avoid, -webkit-region-break-inside: avoid;" valign="top">
+                                <td width="206" height="80">
+                                    <p lang="es-ES">&amp;nbsp;</p>
+                                    <p lang="es-ES">&amp;nbsp;</p>
+                                    <p lang="es-ES">&amp;nbsp;</p>
+                                </td>
+                                <td width="288">
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                </td>
+                                <td width="169">
+                                    <p class="western" lang="es-ES">&amp;nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr style="display: block, page-break-inside: avoid, -webkit-region-break-inside: avoid;" valign="button">
+                                <td width="206">
+                                    <h3 class="western" lang="es-ES" align="center"><span style="font-family: Calibri, sans-serif;"><span style="font-size: small;">MANAGER OFFICE</span></span></h3>
+                                </td>
+                                <td width="288">
+                                    <h3 class="western" lang="es-ES" align="center"><span style="font-family: Calibri, sans-serif;"><span style="font-size: small;">GERENCIA COMERCIAL</span></span></h3>
+                                </td>
+                                <td width="169">
+                                    <h5 class="western" lang="es-ES" align="center"><span style="font-family: Calibri, sans-serif;"><span style="font-size: small;">CLIENTE</span></span></h5>
+                                </td>
+                            </tr>
+                            <tr style="display: block, page-break-inside: avoid, -webkit-region-break-inside: avoid;" valign="top">
+                                <td width="206">
+                                    <p lang="es-ES" align="center"><span style="font-family: Calibri, sans-serif;">Lic. Mario Robles M.</span></p>
+                                </td>
+                                <td width="288">
+                                    <p class="western" lang="es-ES-u-co-trad" align="center">Ingrid Andia</p>
+                                </td>
+                                <td width="169">
+                                    <p class="western" lang="es-ES-u-co-trad" align="center"><span style="font-family: Calibri, sans-serif;">&amp;nbsp;</span></p>
+                                    <p class="western" lang="es-ES-u-co-trad" align="center"><span style="font-family: Calibri, sans-serif;">Cargo.......................................</span></p>
+                                    <p class="western" lang="es-ES-u-co-trad" align="center"><span style="font-family: Calibri, sans-serif;">Nombre....................................</span></p>
+                                </td>
+                            </tr>
+			</div>
+                    </table>
+	</tr>
+    </template>
+
+    <template id="print_sale_order_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc_id">
+                <t t-call="melon_sale_print.print_sale_order_report_document1" t-lang="doc_id.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

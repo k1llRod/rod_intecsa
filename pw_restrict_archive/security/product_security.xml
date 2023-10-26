@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_archive_product" model="res.groups">
+            <field name="name">Restrict to Archive Product</field>
+        </record>
+        <record id="group_archive_partner" model="res.groups">
+            <field name="name">Restrict to Archive Partner</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sh_base_min_max_price
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-01 05:17+0000\n"
+"PO-Revision-Date: 2021-12-01 05:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sh_base_min_max_price
+#: model:ir.model.fields,field_description:sh_base_min_max_price.field_product_template__display_name
+msgid "Display Name"
+msgstr "Afficher un nom"
+
+#. module: sh_base_min_max_price
+#: model:ir.model.fields,field_description:sh_base_min_max_price.field_product_template__id
+msgid "ID"
+msgstr "identifiant"
+
+#. module: sh_base_min_max_price
+#: model:ir.model.fields,field_description:sh_base_min_max_price.field_product_template____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification sur"
+
+#. module: sh_base_min_max_price
+#: model:ir.model.fields,field_description:sh_base_min_max_price.field_product_product__pro_max_sale_price
+#: model:ir.model.fields,field_description:sh_base_min_max_price.field_product_template__pro_max_sale_price
+msgid "Maximum Sale Price"
+msgstr "Prix de vente maximum"
+
+#. module: sh_base_min_max_price
+#: model:ir.model.fields,field_description:sh_base_min_max_price.field_product_product__pro_min_sale_price
+#: model:ir.model.fields,field_description:sh_base_min_max_price.field_product_template__pro_min_sale_price
+msgid "Minimum Sale Price"
+msgstr "Prix de vente minimum"
+
+#. module: sh_base_min_max_price
+#: model:ir.model,name:sh_base_min_max_price.model_product_template
+msgid "Product Template"
+msgstr "Modèle de produit"

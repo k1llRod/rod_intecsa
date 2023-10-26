@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="res_partner_tree_inh">
+            <field name="name">res.partner.tree.inh</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                    <header>
+                        <button name="assign_client" type="object" class="oe_highlight"
+                                string="Reasignar clientes" />
+                    </header>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_partner_form_inh">
+            <field name="name">res.partner.form.inh</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//sheet/group/group/div/field[@name='state_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//sheet/group/group/div/field[@name='zip']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//sheet/group/group/div/field[@name='city']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+<!--                <xpath expr="//sheet/group/group/div/field[@name='country_id']" position="attributes">-->
+<!--                    <attribute name="default">29</attribute>-->
+<!--                </xpath>-->
+                <xpath expr="//span[@name='address_name']" position="before">
+                    <field name="category_id"/>
+                    <field name="class_partner"/>
+                    <field name="reassigned"/>
+                    <field name="state_id" string="Regional"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_res_partner_filter_inh">
+            <field name="name">res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='type_person']" position="before">
+                    <filter string="Sin registro de ventas" name="partner_no_sales" domain="[('is_company', '=', False)]"/>
+                    <separator />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

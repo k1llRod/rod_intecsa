@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+       
+        <!-- STOCK PICKING VIEWS -->
+        
+        <record id="view_stock_picking_valued_form" model="ir.ui.view">
+            <field name="name">stock.picking.valued.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <field name="origin" position="after">
+                    <field name="pricelist_id" groups="product.group_sale_pricelist" attrs="{'invisible': [('picking_type_code', 'not in', ['outgoing'])], 'required': [('picking_type_code', 'in', ['outgoing'])]}"/>
+                    <field name="currency_id" invisible="1" attrs="{'required': [('picking_type_code', 'in', ['incoming', 'outgoing'])]}"/>
+                    <field name="payment_term_id" options="{'no_create': True}" attrs="{'invisible': [('picking_type_code', 'not in', ['incoming', 'outgoing'])]}"/>
+                </field>
+                <field name="picking_type_id" position="after">
+                    <field name="picking_type_code" invisible="1"/>
+                </field>
+                <xpath expr="//field[@name='picking_type_id']/.." position="after">
+                    <group string="Sale/Purchase Information" attrs="{'invisible': [('picking_type_code', 'not in', ['incoming', 'outgoing'])]}">
+                        <field name="client_order_ref"/>
+                    </group>
+                    <group string="Invoicing" attrs="{'invisible': [('picking_type_code', 'not in', ['incoming', 'outgoing'])]}">
+                        <field name="fiscal_position_id" options="{'no_create': True}"/>
+                    </group>
+                </xpath>
+                <field name="move_lines" position="after">
+                    <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total" attrs="{'invisible': [('picking_type_code', 'not in', ['incoming', 'outgoing'])]}">
+                        <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <field name="amount_tax" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                            <label for="amount_total"/>
+                            <button name="button_dummy" states="draft,sent" string="(update)" type="object" class="oe_edit_only oe_link"/>
+                        </div>
+                        <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    </group>
+                    <div class="oe_clear"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- STOCK MOVE VIEWS -->
+
+        <record id="view_move_picking_valued_tree" model="ir.ui.view">
+            <field name="name">move.picking.valued.tree</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+            <field name="arch" type="xml">
+                <field name="picking_type_id" position="after">
+                    <field name="picking_type_code" invisible="1"/>
+                </field>
+                <field name="state" position="after">
+                    <field name="move_price_unit"/>
+                    <field name="tax_id" widget="many2many_tags" domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]"/>
+                    <field name="discount" groups="sale.group_discount_per_so_line"/>
+                    <field name="price_subtotal" widget="monetary" options="{'currency_field': 'currency_id'}" groups="sale.group_show_price_subtotal"/>
+                    <field name="price_total" widget="monetary" options="{'currency_field': 'currency_id'}" groups="sale.group_show_price_total"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_move_picking_valued_form" model="ir.ui.view">
+            <field name="name">move.picking.valued.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_form"/>
+            <field name="arch" type="xml">
+                <field name="picking_type_id" position="after">
+                    <field name="picking_type_code" invisible="1"/>
+                </field>
+                <xpath expr="//group[1]" position="after">
+                    <group name="price_grp">
+                        <group name="price_grp_col1">
+                            <field name="move_price_unit"/>
+                            <label for="discount" groups="sale.group_discount_per_so_line"/>
+                            <div name="discount" groups="sale.group_discount_per_so_line">
+                                <field name="discount" class="oe_inline"/> %
+                            </div>
+                            <field name="price_subtotal" widget="monetary" options="{'currency_field': 'currency_id'}" groups="sale.group_show_price_subtotal"/>
+                            <field name="price_total" widget="monetary" options="{'currency_field': 'currency_id'}" groups="sale.group_show_price_total"/>
+                        </group>
+                        <group name="price_grp_col2">
+                            <field name="tax_id" widget="many2many_tags" domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

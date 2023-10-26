@@ -1,0 +1,98 @@
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h2 class="oe_slogan">Stock Picking Valued</h2>
+            <h3>Stock picking</h3>
+            <p>New fields on stock picking model:</p>
+            <ul>
+                <li>Pricelist.</li>
+                <li>Currency.</li>
+                <li>Payment Term.</li>
+                <li>Customer/Supplier Reference.</li>
+                <li>Fiscal Position.</li>
+                <li>Untaxed Amount.</li>
+                <li>Taxes.</li>
+                <li>Total.</li>
+            </ul>
+            <h3>Stock move</h3>
+            <p>New fields on stock move model:</p>
+            <ul>
+                <li>Picking type code (hidden).</li>
+                <li>Unit Price.</li>
+                <li>Subtotal.</li>
+                <li>Taxes.</li>
+                <li>Total.</li>
+                <li>Price Reduce.</li>
+                <li>Price Reduce Tax inc.</li>
+                <li>Price Reduce Tax excl.</li>
+                <li>Discount (%).</li>
+                <li>Currency.</li>
+            </ul>
+            <h3>Connection between models</h3>
+            <p>Fields added to picking model can work alone and can got their data from sale/purchase orders.</p>
+            <h3>Delivery slip report modified</h3>
+            <p>The delivery slip report does not show the operations anymore, now it always shows the moves which makes more sense.</p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h2 class="oe_slogan">Installation</h2>
+        </div>
+        <div class="oe_span12">
+            <p class="oe_mt32">To install this module, you need to:
+                <ul>
+                    <li>You must have installed or available to install the module <b>purchase</b>.</li>
+                    <li>You must have installed or available to install the module <b>stock</b>.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h2 class="oe_slogan">Usage</h2>
+        </div>
+        <div class="oe_span12">
+            <p class="oe_mt32">To use this module, you need to:
+                <ul>
+                    <li>Go to <i>Sales > Sales > Quotations / Sale Orders</i>, and create a new order.</li>
+                    <li>Confirm the sale order and go to see the generated picking.</li>
+                    <li>Check that the data is rightly moved from the sale order model to the picking one.</li>
+                    <li>Go to <i>Purchases > Purchase > Requests for Quotations / Purchase Orders</i>, and create a new order.</li>
+                    <li>Confirm the purchase order and go to see the generated picking.</li>
+                    <li>Check that the data is rightly moved from the purchase order model to the picking one.</li>
+                    <li>Go to <i>Warehouse > Operations > All Operations</i>, and create a picking. 
+                    <li>Check that the data is rightly updated just like if you were creating a sale/purchase order, depending on the picking type.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row">
+        <div class="oe_span12">
+            <h2 class="oe_slogan">Credits</h2>
+        </div>
+        <div class="oe_span12">
+            <h3>Contributors</h3>
+            <ul>
+                <li>Juan Formoso &lt;<a href="mailto:jfv@anubia.es">jfv@anubia.es</a>&gt;</li>
+            </ul>
+        </div>
+        <div class="oe_span12">
+            <h3>Maintainer</h3>
+            <p>
+                This module is maintained by the OCA.<br/>
+                OCA, or the Odoo Community Association, is a nonprofit organization whose mission is to support the collaborative development of Odoo features and promote its widespread use.<br/>
+                To contribute to this module, please visit <a href="http://odoo-community.org">http://odoo-community.org</a>.<br/>
+                <a href="http://odoo-community.org"><img class="oe_picture oe_centered" src="http://odoo-community.org/logo.png"></a>
+            </p>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,50 @@
+<odoo>
+
+    <data>
+
+        <record id="wizard_sales_report_form" model="ir.ui.view">
+            <field name="name">wizard.sales.report.form</field>
+            <field name="model">sales.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Generar Reporte de Ventas en EXCEL">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="year"/>
+                            </group>
+                            <group>
+                                <field name="month"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="warehouse_m2o_id"/>
+                            <field name="pos_m2m_ids" widget="many2many_tags"/>
+                        </group>
+                        <footer>
+                            <button name="get_report" string="Generar Reporte" type="object" class="btn-primary"/>
+                            <button string="Cancel" class="btn-secondary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sales_report_wizard_form" model="ir.actions.act_window">
+            <field name="name">Generar Reporte de Ventas en EXCEL</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sales.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_categ_sales_report_wizard" name="Reportes Versatil" parent="account.menu_finance_reports"
+                  sequence="1"/>
+
+        <menuitem id="menu_action_sales_report_wizard" name="Reporte de Ventas EXCEL"
+                  parent="l10n_bo_invoicer_plus.menu_categ_sales_report_wizard"
+                  action="l10n_bo_invoicer_plus.action_sales_report_wizard_form"
+                  sequence="1"/>
+
+    </data>
+
+</odoo>

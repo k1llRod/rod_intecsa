@@ -1,0 +1,4 @@
+14.0.0.1 ==>fixed issue of creating invoice from commission lines.
+
+14.0.0.2 ==>fixed issue of access rights when manager or user group is not selected for commission.
+         ==>hide sale commission tab when manager or user group is not selected for commission.

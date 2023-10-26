@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+
+        <record id="view_res_config_settings_form" model="ir.ui.view">
+            <field name="name">view.res.config.settings.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="Datos de conexión" string="VR Invoicer"
+                         data-key="l10n_bo_invoicer_pos_plus" groups="base.group_system">
+                        <h2>Datos de conexión Versatil</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-md-12 o_setting_box">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <label for="vr_server" class="oe_inline o_form_label"/>
+                                    <div class="text-muted">
+                                        Url de servidor para la conexión con Versatil
+                                    </div>
+                                    <div>
+                                        <field name="vr_server" placeholder="https://versatil_principal.com.bo"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

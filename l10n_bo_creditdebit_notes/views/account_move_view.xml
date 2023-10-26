@@ -1,0 +1,85 @@
+<odoo>
+    <data>
+
+        <record id="view_inherit_account_move_form_nbc" model="ir.ui.view">
+            <field name="name">view.inherit.account.move.form.nbc</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="l10n_bo_invoice.view_inherit_account_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='n_factura']" position="after">
+                    <field name="n_debitcredit"
+                           attrs="{'readonly':['|',('state','not in',['draft']),('move_type', '=', 'out_invoice'),('type_dosif', '!=', 'manual')], 'invisible': [('note_credit_debit', '!=', True)]}"
+                           force_save="1"/>
+                    <field name="date_debitcredit"
+                           attrs="{'readonly':['|',('state','not in',['draft']),('move_type', '=', 'out_invoice'),('type_dosif', '!=', 'manual')], 'invisible': [('note_credit_debit', '!=', True)]}"
+                           force_save="1"/>
+                    <field name="n_autorizacion_dc"
+                           attrs="{'readonly':['|',('state','not in',['draft']),('move_type', '=', 'out_invoice'),('type_dosif', '!=', 'manual')], 'invisible': [('note_credit_debit', '!=', True)]}"
+                           force_save="1"/>
+                </xpath>
+                <xpath expr="//group[@class='oe_subtotal_footer oe_right']" position="inside">
+                    <field name="amount_debitcredit" class="oe_subtotal_footer_separator"
+                           attrs="{'readonly':['|',('state','not in',['draft']),('move_type', '=', 'out_invoice'),('type_dosif', '!=', 'manual')], 'invisible': [('note_credit_debit', '!=', True)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_inherit_account_move_form_dc" model="ir.ui.view">
+            <field name="name">view.inherit.account.move.form.dc</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="l10n_bo_invoice.view_inherit_account_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tipo_com']" position="replace">
+                    <field name="tipo_com"
+                           attrs="{'invisible': ['|', ('state','not in',['draft']), ('move_type', '=', 'out_invoice')], 'invisible': [('note_credit_debit', '=', True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='state_sin']" position="replace">
+                    <field name="state_sin" force_save="1"
+                           attrs="{'readonly': ['|',('state','not in',['draft','posted']),('move_type', '=', 'out_invoice')], 'invisible': [('note_credit_debit', '=', True)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_move_inherit_tree_dc" model="ir.ui.view">
+            <field name="name">view.account.move.inherit.tree.dc</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="n_debitcredit"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_move_out_refund_type_bo" model="ir.actions.act_window">
+            <field name="name">Notas de Debito-Credito</field>
+            <field name="res_model">account.move</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="view_id" ref="account.view_invoice_tree"/>
+            <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+            <field name="domain">[('move_type', '=', 'in_refund'),('note_credit_debit', '=', True)]</field>
+            <field name="context">{'default_move_type': 'in_refund','default_note_credit_debit': True}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Notas de debito-credito
+                </p>
+                <p>
+                    Registre sus notas de debit y credito
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_action_move_out_refund_type_bo" action="action_move_out_refund_type_bo"
+                  parent="account.menu_finance_payables" sequence="3"/>
+
+        <record id="action_l10n_bo_lcv_lcv_report_xls_xlsxdc" model="ir.actions.report">
+            <field name="name">LCV XLSX</field>
+            <field name="model">lcv.export.wizard.dc</field>
+            <field name="type">ir.actions.report</field>
+            <field name="report_name">l10n_bo_creditdebit_notes.lcv_report_xlsdc.xlsx</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_file">lcv_xls</field>
+        </record>
+
+    </data>
+</odoo>

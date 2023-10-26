@@ -1,0 +1,25 @@
+<odoo>
+
+    <data>
+
+        <record id="view_inherit_account_move_reversal_form" model="ir.ui.view">
+            <field name="name">view.inherit.account.move.reversal.form</field>
+            <field name="model">account.move.reversal</field>
+            <field name="inherit_id" ref="account.view_account_move_reversal"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='reason']" position="after">
+                    <field name="vr_estado" invisible="1"/>
+                    <field name="vr_codigo_motivo"
+                           attrs="{'required':[('vr_estado', '=', 'send')], 'invisible':[('vr_estado', '!=', 'send')]}"/>
+                </xpath>
+                <xpath expr="//button[@name='reverse_moves']" position="attributes">
+                    <attribute name="string">Anular factura</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

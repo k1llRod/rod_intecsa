@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <record id="kw_partner_dob_res_partner_form" model="ir.ui.view" >
+            <field name="name">res.partner.form (kw_partner_dob)</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[1]/group[2]" position="inside">
+	           <!-- <field name="a_company"/>-->
+		    <field name="a_area"/>
+                    <field name="create_date"/>
+                    <field name="vr_contact"/>
+                    <field name="vr_phone_cont"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="kw_partner_dob_res_partner_tree" model="ir.ui.view">
+            <field name="name">res.partner.tree (kw_partner_dob)</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <tree position="inside">
+                    <field name="a_area" optional="show"/>
+                    <field name="vr_contact"/>
+                    <field name="create_date" optional="show"/>
+                </tree>
+            </field>
+        </record>
+        <!--Inherit quotations search view-->
+       <!-- <record id="view_sale_order_inherit_search" model="ir.ui.view">
+          <field name="name">sale.order.search.expand</field>
+          <field name="model">sale.order</field>
+          <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+          <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">-->
+              <!-- This field will show up on the quick search -->
+                <!--<field name="a_company" optional="show"/>
+                <field name="a_area" optional="show"/>
+                <field name="client_order_ref"/>
+            </xpath>
+          </field>
+        </record>-->
+    </data>
+</odoo>

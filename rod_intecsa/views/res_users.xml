@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <!-- Vista Árbol de Modelo loan application -->
+        <record model="ir.ui.view" id="view_users_simple_form_inh">
+            <field name="name">res.users.simplified.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_simple_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mobile']" position="after">
+                    <field name="class_partner"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

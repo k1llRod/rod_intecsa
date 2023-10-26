@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_landed_cost_template">
+            <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="vr_report_remision.external_layout_standard_custom">
+                    <div class="page">
+                        <t t-set="company" t-value="o.company_id.sudo()"/>
+                            <table style="width: 100%;">
+                                <colgroup>
+                                    <col style="width: 30%"/>
+                                    <col style="width: 70%"/>
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <td>
+                                            Documento: <span t-field="o.name"/><br/>
+                                            Fecha: <span t-field="o.date"/>
+                                        </td>
+                                        <td>
+                                            Recepcion: <t t-foreach="o.picking_ids" t-as="l"> <span t-field="l.name"/>,</t><br/>
+                                            Proveedor: <t t-foreach="o.picking_ids" t-as="l"> <span t-field="l.partner_id"/>,</t>
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+
+                            <table style="width:100%;font-size: 14px;">
+                                <thead style="background-color: #5C5C5C;color:white">
+                                    <tr>
+                                        <th>Articulo</th>
+                                        <th>Descripcion</th>
+                                        <th>Cantidad</th>
+                                        <th>U/M</th>
+                                        <th>P/U</th>
+                                        <th>Metodo</th>
+<!--                                        <th>Dscto</th>-->
+<!--                                        <th>valor IC</th>-->
+<!--                                        <th>IVA</th>-->
+                                        <th>Gasto</th>
+                                        <th>Costo Total</th>
+                                        <th>C/U</th>
+                                    </tr>
+                               </thead>
+                                <tbody class="product_table_body">
+                                    <t t-foreach="o.picking_ids" t-as="l">
+                                        <t t-foreach="l.move_ids_without_package" t-as="p">
+                                            <tr style="background-color: #D0D0D0;">
+                                                <td><span t-field="p.product_id.default_code"/></td>
+                                                <td><span t-field="p.product_id.name"/></td>
+                                                <td><span t-field="p.quantity_done"/></td>
+                                                <td><span t-field="p.product_uom"/></td>
+                                                <td><span t-field="p.product_id.standard_price"/></td>
+                                                <td></td>
+<!--                                                <td></td>-->
+<!--                                                <td></td>-->
+                                                <t t-set="gasto" t-value="sum(o.valuation_adjustment_lines.filtered(lambda line: line.product_id == p.product_id).mapped('additional_landed_cost'))"/>
+                                                <td><span t-esc="gasto"/></td>
+                                                <t t-set="cost_total" t-value="round(gasto + (p.product_id.standard_price * p.quantity_done),2)"/>
+                                                <td><span t-esc="cost_total"/></td>
+                                                <t t-set="cost_unit" t-value="round(cost_total/p.quantity_done, 2)"/>
+                                                <td><span t-esc="cost_unit"/></td>
+                                            </tr>
+                                            <t t-foreach="o.valuation_adjustment_lines" t-as="v">
+                                                 <tr t-if="v.product_id == p.product_id" style="background-color: #F7F6F6;">
+                                                     <td></td>
+                                                     <td><span t-field="v.name"/></td>
+                                                     <td></td>
+
+                                                     <td></td>
+                                                     <td></td>
+                                                     <td><span t-field="v.cost_line_id.split_method"/></td>
+<!--                                                     <td></td>-->
+<!--                                                     <td></td>-->
+                                                     <td><span t-field="v.additional_landed_cost"/></td>
+
+                                                     <td></td>
+                                                     <td></td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

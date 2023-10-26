@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="wizard_lcv_export_dc" model="ir.ui.view">
+            <field name="name">Notas Dédito Crédito</field>
+            <field name="model">lcv.export.wizard.dc</field>
+            <field name="arch" type="xml">
+                <form string="Libro de Compras y Ventas">
+                    <field name="state" invisible="1"/>
+                    <field name="name" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <group states="choose" string="Parametros LCV">
+                        <label for="year" string="Año"/>
+                        <div>
+                            <field name="year" class="oe_inline"/>
+                            Periodo:
+                            <field name="period" style="width:130px !important;" class="oe_inline"/>
+                        </div>
+                        <field name="format"/>
+                    </group>
+                    <div states="get">
+                        <h2>Exportación Completa</h2>
+                        <p>Haga clic en el siguiente enlace:
+                            <field name="data" readonly="1" filename="name"/>
+                        </p>
+                    </div>
+                    <footer states="choose">
+                        <button name="act_getfile" string="Exportar" type="object" class="btn-primary"/>
+                        <button special="cancel" string="Cancelar" type="object" class="btn-default"/>
+                    </footer>
+                    <footer states="get">
+                        <button special="cancel" string="Cerrar" type="object" class="btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_lcv_dc" model="ir.actions.act_window">
+            <field name="name">Notas Débito-Crédito</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">lcv.export.wizard.dc</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem action="action_wizard_lcv_dc" id="menu_wizard_lcv_dc" parent="l10n_bo_lcv.menu_impuestos_nacionales"/>
+    </data>
+</odoo>

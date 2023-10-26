@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Modificaciones a reporte Cotización/Pedido-->
+        <template id="vr_report_saleorder_inherit" inherit_id="sale.report_saleorder_document">
+            <!--<xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+                <attribute name="t-call">web.internal_layout</attribute>
+            </xpath>-->
+           <xpath expr="//t[@t-set='address']" position="replace">
+            </xpath>
+            <xpath expr="//div[@id='informations']/div[2]" position="replace">
+                <div t-if="doc.date_order and doc.state not in ['draft','sent']" class="col-auto col-3 mw-100 mb-2">
+                    <strong>Order Date:</strong>
+                    <p class="m-0" t-field="doc.date_order" t-options='{"widget": "date"}'/>
+                </div>
+            </xpath>
+            <xpath expr="//div[@id='informations']/div[5]" position="replace">
+                <div class="col-auto col-3 mw-100 mb-2">
+                    <strong>Cliente:</strong>
+                    <p class="m-0" t-field="doc.partner_id"/>
+                </div>
+		 <div t-if="doc.hospital_id" class="col-auto col-3 mw-100 mb-2">
+                    <strong>Hospital:</strong>
+                    <p class="m-0" t-field="doc.hospital_id"/>
+                </div>
+                <div t-if="doc.doctor" class="col-auto col-3 mw-100 mb-2">
+                    <strong>Médico:</strong>
+                    <p class="m-0" t-field="doc.doctor"/>
+                </div>
+                <div t-if="doc.patient" class="col-auto col-3 mw-100 mb-2">
+                    <strong>Paciente:</strong>
+                    <p class="m-0" t-field="doc.patient"/>
+                </div>
+            </xpath>
+            <xpath expr="//td[@name='td_quantity']" position="replace">
+                <td name="td_quantity" class="text-right">
+                    <span t-field="line.product_uom_qty"/>
+                </td>
+            </xpath>
+            <xpath expr="//th[@name='th_subtotal']" position="replace">
+                <th name="th_subtotal" class="text-right">
+                    <span>Importe</span>
+                </th>
+            </xpath>
+            <!--<xpath expr="//t[@t-if='not line.display_type']" position="attributes">
+                <attribute name="t-if">not line.display_type and line.price_unit >= 0</attribute>
+            </xpath>-->
+            <xpath expr="//td[@name='td_subtotal']" position="replace">
+                <td name="td_subtotal" class="text-right o_price_total">
+                    <span t-field="line.price_total"/>
+                </td>
+            </xpath>
+            <xpath expr="//div[@name='so_total_summary']" position="replace">
+                <div class="clearfix" name="so_total_summary">
+                    <div id="total" class="row" name="total">
+                        <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                            <table class="table table-sm">
+                                <tr class="border-black o_subtotal" style="">
+                                    <td name="td_amount_untaxed_label">
+                                        <strong>Subtotal</strong>
+                                    </td>
+                                    <td name="td_amount_untaxed" class="text-right">
+                                        <span t-field="doc.amount_open"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td name="td_amount_untaxed_label">
+                                        <strong>Descuento</strong>
+                                    </td>
+                                    <td name="td_amount_untaxed" class="text-right">
+                                        <span t-field="doc.amount_des"/>
+                                    </td>
+                                </tr>
+                                <tr class="border-black o_total">
+                                    <td name="td_amount_total_label">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td name="td_amount_total" class="text-right">
+                                        <span t-field="doc.amount_total"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

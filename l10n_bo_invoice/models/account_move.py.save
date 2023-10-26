@@ -1,0 +1,129 @@
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError, ValidationError
+import qrcode
+import io
+import base64
+import datetime
+from .operations.num_literal import to_word
+
+
+class AccountMove(models.Model):
+    _inherit = 'account.move'
+
+    @api.depends('line_ids.balance', 'currency_id', 'company_id', 'invoice_date', 'line_ids')
+    def _compute_amount_sin(self):
+        amount_iva = 0
+        amount_des = 0
+        amount_exe = 0
+        amount_ice = 0
+        amount_open = 0
+        for move in self:
+            for bina in move.amount_by_group:
+                amount_iva += bina[1]
+
+            for line_inv in move.invoice_line_ids:
+                if line_inv.price_unit > 0:
+                    amount_open += line_inv.quantity * line_inv.price_unit
+                else:
+                    amount_des += line_inv.quantity * line_inv.price_unit
+
+                if not line_inv.tax_ids:
+                    amount_exe += line_inv.price_subtotal
+
+                amount_ice += line_inv.amount_ice_iehd
+
+            move.amount_iva = amount_iva
+            move.amount_des = amount_des * -1
+            move.amount_exe = amount_exe
+            move.amount_ice_iehd = amount_ice
+            move.amount_open = amount_open
+            move.amount_imp = amount_open - amount_exe - amount_ice + amount_des
+
+    warehouse_id = fields.Many2one(comodel_name='stock.warehouse',
+                                   string='Sucursal', readonly=True,
+                                   states={'draft': [('readonly', False)]})
+    date_time = fields.Datetime(string="Fecha/Hora")
+    nit_ci = fields.Char(string='NTI/CI', size=12, default='0',
+                         readonly=False, copy=True,
+                         states={'draft': [('readonly', False)]})
+    razon_social = fields.Char(string='Razón Social', size=100, default='S/N',
+                               readonly=False, copy=True,
+                               states={'draft': [('readonly', False)]})
+    dosificacion = fields.Many2one(comodel_name='dosing.control',
+                                   string='Certificado', readonly=True,
+                                   states={'draft': [('readonly', False)]},
+                                   help='Selecciona la dosificación en '
+                                        'función de dos tipos:'
+                                        'Manual o Computarizada')
+    type_dosif = fields.Selection(related='dosificacion.type',
+                                  string='Tipo de Dosificación')
+    qr_text = fields.Char(string='Cadena Código QR', copy=False,
+                          help='Puede poner sobre este campo un lector QR para que se distribuya los datos dentro de la factura')
+    n_autorizacion = fields.Char(string='Nro. Autorización')
+    n_factura = fields.Float(string='Nro. Factura', digits=(15, 0), default=0, copy=False)
+    codigo_control = fields.Char(string='Código Control', size=100, default=0, copy=False)
+    qr_image = fields.Binary(string='Código QR', help='Imágen QR de la Factura',
+                             readonly=True, copy=False,
+                             states={'draft': [('readonly', False)]})
+    amount_text = fields.Char(string="Monto Literal")
+    state_sin = fields.Selection([
+        ('A', 'ANULADA'),
+        ('V', u'VÁLIDA'),
+        ('E', 'EXTRAVIADA'),
+        ('N', 'NO UTILIZADA'),
+        ('C', 'EMITIDA EN CONTINGENCIA'),
+        ('L', u'LIBRE CONSIGNACIÓN'),
+        ('NA', u'NO APLICA'),
+    ], "Estado SIN", help="Estado SIN", copy=False)
+    n_dui = fields.Char(string=u"Nro. de DUI", size=16, default='0')
+    note_credit_debit = fields.Boolean(string='Nota de Credito Debito',
+                                       default=False, copy=False,
+                                       readonly=True)
+    tipo_com = fields.Selection([
+        ('1',
+         u'Compras para mercado interno con destino y actividades gravadas'),
+        ('2',
+         u'Compras para mercado interno con destino a actividades no gravadas'),
+        ('3', u'Compras sujetas a proporcionalidad'),
+        ('4', u'Compras para exportaciones'),
+        (
+            '5', u'Compras tanto para el mercado interno como para exportaciones'),
+    ], "Tipo de Compra", help="Tipo de Compra", readonly=True,
+        states={'draft': [('readonly', False)]})
+    date_end = fields.Date(string="Límite emisión",
+                           related="dosificacion.date_end",
+                           help="Fecha Límite de emision para la dosificación asignada")
+
+    # TOTALES
+    amount_imp = fields.Monetary(string='Importe Base para Impuesto',
+                                 currency_field='',
+                                 compute='_compute_amount_sin',
+                                 store=True, readonly=True,
+                                 help='Importe base para crédito o débito fiscal')
+
+    amount_iva = fields.Monetary(string='Importe IVA',
+                                 store=True, readonly=True,
+                                 compute='_compute_amount_sin',
+                                 currency_field='company_currency_id',
+                                 track_visibility='always')
+
+    amount_exe = fields.Monetary(string='Importe Exento',
+                                 currency_field='company_currency_id',
+                                 store=True,
+                                 compute='_compute_amount_sin', readonly=True)
+
+    amount_des = fields.Monetary('Descuento',
+                                 currency_field='company_currency_id',
+                                 compute='_compute_amount_sin',
+                                 store=True,
+                                 readonly=True)
+
+    amount_ice_iehd = fields.Monetary(string='Importe ICE/IEHD',
+                                      currency_field='company_currency_id',
+                                      store=True,
+                                      compute='_compute_amount_sin',
+                                      readonly=True)
+
+    amount_open = fields.Monetary(string='Total Factura',
+                                  currency_field='company_currency_id',
+                                  compute='_compute_amount_sin',
